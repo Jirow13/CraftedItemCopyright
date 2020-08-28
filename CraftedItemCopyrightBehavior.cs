@@ -36,7 +36,6 @@ namespace CraftedItemCopyright
 				//this.first_run = false;
 				this.first_run = true;
 				//Debug
-				//MessageBox.Show($"this.first_run now set to true");
 				//MessageBox.Show($"Cycling Through Settlement Inventory for Crafted/NoMerchandise Items\n");
 				//int i = 0;
 				foreach (Settlement settlement in Settlement.All)
@@ -65,6 +64,7 @@ namespace CraftedItemCopyright
 				}
 				//Debug
 				//InformationManager.DisplayMessage(new InformationMessage($"Removed " + i + " Crafted Items.\n"));
+				InformationManager.DisplayMessage(new InformationMessage($"first_run final disposition is "+first_run+".\n"));
 			}
 		}
 
