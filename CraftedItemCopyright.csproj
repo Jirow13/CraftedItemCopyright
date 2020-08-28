@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MNB2DIR>E:\SteamLibrary\steamapps\common\Mount &amp; Blade II Bannerlord</MNB2DIR>
+    <MOD_ID>CraftedItemCopyright</MOD_ID>
+    <MOD_OUTDIR>$(MNB2DIR)\Modules</MOD_OUTDIR>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <PlatformTarget Condition=" '$(PlatformTarget)' == '' ">x64</PlatformTarget>
+    <ProjectGuid>{56A89D8C-F7C7-4B8B-A38D-E34813A9E374}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CraftedItemCopyRight</RootNamespace>
+    <AssemblyName>CraftedItemCopyRight</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <!-- Debug Configuration Properties -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>E:\SteamLibrary\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\CraftedItemCopyright\bin\Win64_Shipping_Client\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <!-- Release Configuration Properties -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>$(MOD_OUTDIR)\$(MOD_ID)\bin\Win64_Shipping_Client</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- Debugging Properties -->
+  <PropertyGroup>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(MNB2DIR)\bin\Win64_Shipping_Client\Bannerlord.exe</StartProgram>
+    <StartArguments>
+    </StartArguments>
+    <StartWorkingDirectory>$(MNB2DIR)\bin\Win64_Shipping_Client</StartWorkingDirectory>
+  </PropertyGroup>
+  <!-- Bannerlord Native Assemblies -->
+  <ItemGroup>
+    <Reference Include="$(MNB2DIR)\bin\Win64_Shipping_Client\TaleWorlds*.dll">
+      <HintPath>%(Identity)</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <!-- Bannerlord Module Assemblies  -->
+    <Reference Include="$(MNB2DIR)\Modules\Native\bin\Win64_Shipping_Client\TaleWorlds*.dll">
+      <HintPath>%(Identity)</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(MNB2DIR)\Modules\SandBox\bin\Win64_Shipping_Client\SandBox*.dll">
+      <HintPath>%(Identity)</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(MNB2DIR)\Modules\StoryMode\bin\Win64_Shipping_Client\StoryMode*.dll">
+      <HintPath>%(Identity)</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(MNB2DIR)\Modules\CustomBattle\bin\Win64_Shipping_Client\TaleWorlds*.dll">
+      <HintPath>%(Identity)</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <!-- Load Harmony as Package
+    <Reference Include="$(MNB2DIR)\Save\0Harmony.dll">
+      <HintPath>%(Identity)</HintPath>
+      <Private>False</Private>
+    </Reference>
+	 -->
+    <Reference Include="$(MNB2DIR)\Save\ModLib.Definitions.dll">
+      <HintPath>%(Identity)</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="0Harmony, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Lib.Harmony.2.0.2\lib\net472\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <!-- Files & Classes -->
+  <ItemGroup>
+    <Compile Include="CraftedItemCopyright.cs" />
+    <Compile Include="CraftedItemCopyrightBehavior.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="SubModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="packages\Lib.Harmony.2.0.2\.signature.p7s" />
+    <None Include="packages\Lib.Harmony.2.0.2\Lib.Harmony.2.0.2.nupkg" />
+    <None Include="packages\Lib.Harmony.2.0.2\LICENSE" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages\Lib.Harmony.2.0.2\HarmonyLogo.png" />
+    <Content Include="packages\Lib.Harmony.2.0.2\lib\net35\0Harmony.dll" />
+    <Content Include="packages\Lib.Harmony.2.0.2\lib\net35\0Harmony.xml" />
+    <Content Include="packages\Lib.Harmony.2.0.2\lib\net45\0Harmony.dll" />
+    <Content Include="packages\Lib.Harmony.2.0.2\lib\net45\0Harmony.xml" />
+    <Content Include="packages\Lib.Harmony.2.0.2\lib\net472\0Harmony.dll" />
+    <Content Include="packages\Lib.Harmony.2.0.2\lib\net472\0Harmony.xml" />
+    <Content Include="packages\Lib.Harmony.2.0.2\lib\net48\0Harmony.dll" />
+    <Content Include="packages\Lib.Harmony.2.0.2\lib\net48\0Harmony.xml" />
+    <Content Include="packages\Lib.Harmony.2.0.2\lib\netcoreapp3.0\0Harmony.dll" />
+    <Content Include="packages\Lib.Harmony.2.0.2\lib\netcoreapp3.0\0Harmony.xml" />
+    <Content Include="packages\Lib.Harmony.2.0.2\lib\netcoreapp3.1\0Harmony.dll" />
+    <Content Include="packages\Lib.Harmony.2.0.2\lib\netcoreapp3.1\0Harmony.xml" />
+    <Content Include="SubModule.xml" />
+  </ItemGroup>
+  <!-- Post-Build - Uncomment What You Need -->
+  <PropertyGroup>
+    <PostBuildEvent>
+		xcopy /d /y "$(MSBuildProjectDirectory)\SubModule.xml" "..\..\"
+	</PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
