@@ -37,7 +37,7 @@ namespace CraftedItemCopyright
 						__result = Traverse.Create(__instance).Method("GetTournamentPrize", new Type[0], null).GetValue<ItemObject>();
 						return;
 					}
-					MessageBox.Show("Crafted Items No Merchandise: Cannot find method GetTournamentPrize in order to replace crafted item tournament prize!");
+					InformationManager.DisplayMessage(new InformationMessage("Crafted Items No Merchandise: Cannot find method GetTournamentPrize in order to replace crafted item tournament prize!"));
 				}
 			}
 

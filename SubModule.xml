@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Module>
-    <Name value="Crafted Item Copyright"/>
+    <Name value="Crafted Item Copyright- Jiro's Fix"/>
     <Id value="CraftedItemCopyright"/>
     <Version value="v1.0.1"/>
     <SingleplayerModule value="true"/>

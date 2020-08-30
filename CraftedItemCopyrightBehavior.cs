@@ -11,8 +11,43 @@ namespace CraftedItemCopyright
 	{
 		public override void RegisterEvents()
 		{
+			CampaignEvents.SettlementEntered.AddNonSerializedListener(this, new Action<MobileParty, Settlement, Hero>(this.OnSettlementEntered));
 			CampaignEvents.OnNewItemCraftedEvent.AddNonSerializedListener(this, new Action<ItemObject, Crafting.OverrideData>(this.OnNewItemCrafted));
 			CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnSessionLaunched));
+		}
+
+		private void OnSettlementEntered( MobileParty party, Settlement settlement, Hero hero)
+        {
+			if( (party != null && hero != null) && party.LeaderHero != null && party.LeaderHero == hero && party.IsMainParty)
+            {
+				// Debug
+				//InformationManager.DisplayMessage(new InformationMessage($"OnSettlementEntered Triggered by "+hero.Name+ "\nMobileParty = " + party.Name + "\nSettlement = " + settlement.Name + "\n"));
+				//InformationManager.DisplayMessage(new InformationMessage($"Looking through settlement inventory\n"));
+				
+				List<ItemRosterElement> to_remove = new List<ItemRosterElement>();
+				if (settlement.ItemRoster != null)
+				{
+					// Debug
+					//int i = 0;
+					foreach (ItemRosterElement element in settlement.ItemRoster)
+					{
+						if (element.EquipmentElement.Item != null && element.EquipmentElement.Item.NotMerchandise && element.EquipmentElement.Item.IsCraftedWeapon)
+						{
+							to_remove.Add(element);
+							// Debug
+							//i++;
+							//InformationManager.DisplayMessage(new InformationMessage($"Added item to remove: "+element+"\n"));
+						}
+					}
+
+					foreach (ItemRosterElement element2 in to_remove)
+					{
+						settlement.ItemRoster.Remove(element2, true);
+						//Debug
+						//InformationManager.DisplayMessage(new InformationMessage($"Removed "+element2+".\n"));
+					}
+				}
+			}
 		}
 
 		private void OnNewItemCrafted(ItemObject itemObject, Crafting.OverrideData overrideData)
