@@ -13,15 +13,24 @@
       <DependedModule Id="StoryMode" />
     </DependedModules>
     <SubModules>
-      <SubModule>
-        <Name value="CraftedItemCopyright"/>
-        <DLLName value="CraftedItemCopyright.dll"/>
-        <SubModuleClassType value="CraftedItemCopyright.SubModule"/>
-        <Tags>
-          <Tag key="DedicatedServerType" value="none" />
-          <Tag key="IsNoRenderModeElement" value="false" />
-        </Tags>
-      </SubModule>
+        <SubModule>
+            <Name value="CraftedItemCopyright"/>
+            <DLLName value="CraftedItemCopyright.dll"/>
+            <SubModuleClassType value="CraftedItemCopyright.SubModule"/>
+            <Tags>
+                <Tag key="DedicatedServerType" value="none" />
+                <Tag key="IsNoRenderModeElement" value="false" />
+            </Tags>
+        </SubModule>
+	    <SubModule>
+		    <Name value="MCMv3 Integrated Loader"/>
+		    <DLLName value="MCMv3.dll"/>
+		    <SubModuleClassType value="MCM.IntegratedLoaderSubModule"/>
+		    <Tags>
+			    <Tag key="DedicatedServerType" value="none" />
+			    <Tag key="IsNoRenderModeElement" value="false" />
+		    </Tags>
+	    </SubModule>
     </SubModules>
 	<Xmls/>
   </Module>
