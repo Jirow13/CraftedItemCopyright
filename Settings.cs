@@ -13,7 +13,7 @@ namespace CraftedItemCopyRight
         public override string Format => "json";
 
 
-        [SettingPropertyBool("Clean Crafted Items on Game Load (Default Behavior)", Order = 0, RequireRestart = false, HintText = "Remove any crafted items from all settlements when you load the game.")]
+        [SettingPropertyBool("Clean Crafted Items on Game Load (Default Behavior)", Order = 0, RequireRestart = true, HintText = "Remove any crafted items from all settlements when you load the game.")]
         [SettingPropertyGroup("Main")]
         public bool CleanItemsOnSessionLaunched { get; set; } = true;
 
