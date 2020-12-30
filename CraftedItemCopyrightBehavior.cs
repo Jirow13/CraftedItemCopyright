@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using CraftedItemCopyRight;
 using HarmonyLib;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
@@ -19,7 +18,7 @@ namespace CraftedItemCopyright
 
 		private void OnSettlementEntered( MobileParty party, Settlement settlement, Hero hero)
         {
-			if (CraftedItemCopyrightSettings.Instance.CleanItemsOnSettlementEntry)
+			if (CraftedItemCopyrightSettings.Instance is { } settings && settings.CleanItemsOnSettlementEntry)
 			{
 				if ((party != null && hero != null) && party.LeaderHero != null && party.LeaderHero == hero && party.IsMainParty)
 				{
@@ -34,7 +33,8 @@ namespace CraftedItemCopyright
 						//int i = 0;
 						foreach (ItemRosterElement element in settlement.ItemRoster)
 						{
-							if (element.EquipmentElement.Item != null && element.EquipmentElement.Item.NotMerchandise && element.EquipmentElement.Item.IsCraftedWeapon)
+							if (element.EquipmentElement.Item != null && element.EquipmentElement.Item.NotMerchandise && element.EquipmentElement.Item.IsCraftedWeapon &&
+								( settings.IgnoreUniqueItems == true && element.EquipmentElement.Item.IsUniqueItem != true))
 							{
 								to_remove.Add(element);
 								// Debug
@@ -45,7 +45,7 @@ namespace CraftedItemCopyright
 
 						foreach (ItemRosterElement element2 in to_remove)
 						{
-							settlement.ItemRoster.Remove(element2, true);
+							settlement.ItemRoster.Remove(element2);
 							//Debug
 							//InformationManager.DisplayMessage(new InformationMessage($"Removed "+element2+".\n"));
 						}
@@ -63,7 +63,7 @@ namespace CraftedItemCopyright
 
 		public void OnSessionLaunched(CampaignGameStarter campaignGameStarter)
 		{
-			if (CraftedItemCopyrightSettings.Instance.CleanItemsOnSessionLaunched)
+			if (CraftedItemCopyrightSettings.Instance is { } settings && settings.CleanItemsOnSessionLaunched)
 			{
 				//Debug
 				//MessageBox.Show($"Session Launched. Checking first.run:");
@@ -73,8 +73,6 @@ namespace CraftedItemCopyright
 					//Debug
 					//MessageBox.Show($"this.first_run is False");
 
-					//Fix: Change to true after it's first run to prevent it happening again until a reload.
-					//this.first_run = false;
 					this.first_run = true;
 					//Debug
 					//MessageBox.Show($"Cycling Through Settlement Inventory for Crafted/NoMerchandise Items\n");
@@ -86,7 +84,8 @@ namespace CraftedItemCopyright
 						{
 							foreach (ItemRosterElement element in settlement.ItemRoster)
 							{
-								if (element.EquipmentElement.Item != null && element.EquipmentElement.Item.NotMerchandise && element.EquipmentElement.Item.IsCraftedWeapon)
+								if (element.EquipmentElement.Item != null && element.EquipmentElement.Item.NotMerchandise && element.EquipmentElement.Item.IsCraftedWeapon &&
+								(settings.IgnoreUniqueItems == true && element.EquipmentElement.Item.IsUniqueItem != true))
 								{
 									to_remove.Add(element);
 									// Debug
@@ -97,7 +96,7 @@ namespace CraftedItemCopyright
 
 							foreach (ItemRosterElement element2 in to_remove)
 							{
-								settlement.ItemRoster.Remove(element2, true);
+								settlement.ItemRoster.Remove(element2);
 								//Debug
 								//InformationManager.DisplayMessage(new InformationMessage($"Removed "+element2+".\n"));
 							}
@@ -120,7 +119,6 @@ namespace CraftedItemCopyright
 
 		public static readonly CraftedItemCopyrightBehavior Instance = new CraftedItemCopyrightBehavior();
 
-		// This line seems to declare the variable, but I don't think it's ever executed, or it's immediately overwritten by L75
 		public bool first_run = true;
 	}
 }
