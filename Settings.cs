@@ -10,7 +10,7 @@ namespace CraftedItemCopyRight
         public override string Id => "CraftedItemCopyrightSettings";
         public override string DisplayName => "Crafted Item Copyright Settings";
         public override string FolderName => "CraftedItemCopyrightSettings";
-        public override string Format => "json";
+        public override string FormatType => "json2";
 
 
         [SettingPropertyBool("Clean Crafted Items on Game Load (Default Behavior)", Order = 0, RequireRestart = true, HintText = "Remove any crafted items from all settlements when you load the game.")]
@@ -20,5 +20,10 @@ namespace CraftedItemCopyRight
         [SettingPropertyBool("Clean Crafted Items on Settlement Entry", Order = 1, RequireRestart = false, HintText = "Remove any crafted items from settlement's shop when you enter a settlement.")]
         [SettingPropertyGroup("Main")]
         public bool CleanItemsOnSettlementEntry { get; set; } = false;
+
+        [SettingPropertyBool("Ignore Items Flagged as 'Unique'", Order = 1, RequireRestart = false, HintText = "Ignores any items flagged as Unique, which includes items crated by some other mods (ex. Special Loot)")]
+        [SettingPropertyGroup("Main")]
+        public bool IgnoreUniqueItems { get; set; } = true;
+
     }
 }

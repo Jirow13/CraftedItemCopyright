@@ -19,7 +19,7 @@ namespace CraftedItemCopyright
 
 		private void OnSettlementEntered( MobileParty party, Settlement settlement, Hero hero)
         {
-			if (CraftedItemCopyrightSettings.Instance.CleanItemsOnSettlementEntry)
+			if (CraftedItemCopyrightSettings.Instance is { } settings && settings.CleanItemsOnSettlementEntry)
 			{
 				if ((party != null && hero != null) && party.LeaderHero != null && party.LeaderHero == hero && party.IsMainParty)
 				{
@@ -34,7 +34,8 @@ namespace CraftedItemCopyright
 						//int i = 0;
 						foreach (ItemRosterElement element in settlement.ItemRoster)
 						{
-							if (element.EquipmentElement.Item != null && element.EquipmentElement.Item.NotMerchandise && element.EquipmentElement.Item.IsCraftedWeapon)
+							if (element.EquipmentElement.Item != null && element.EquipmentElement.Item.NotMerchandise && element.EquipmentElement.Item.IsCraftedWeapon &&
+								(settings.IgnoreUniqueItems == true && element.EquipmentElement.Item.IsUniqueItem != true))
 							{
 								to_remove.Add(element);
 								// Debug
@@ -63,18 +64,15 @@ namespace CraftedItemCopyright
 
 		public void OnSessionLaunched(CampaignGameStarter campaignGameStarter)
 		{
-			if (CraftedItemCopyrightSettings.Instance.CleanItemsOnSessionLaunched)
+			if (CraftedItemCopyrightSettings.Instance is { } settings && settings.CleanItemsOnSessionLaunched)
 			{
 				//Debug
 				//MessageBox.Show($"Session Launched. Checking first.run:");
-				//Fix: Changing to !first.run didn't do anything as the bool is declared. Changed to == false and it started to work.
 				if (this.first_run == false)
 				{
 					//Debug
 					//MessageBox.Show($"this.first_run is False");
 
-					//Fix: Change to true after it's first run to prevent it happening again until a reload.
-					//this.first_run = false;
 					this.first_run = true;
 					//Debug
 					//MessageBox.Show($"Cycling Through Settlement Inventory for Crafted/NoMerchandise Items\n");
@@ -86,7 +84,8 @@ namespace CraftedItemCopyright
 						{
 							foreach (ItemRosterElement element in settlement.ItemRoster)
 							{
-								if (element.EquipmentElement.Item != null && element.EquipmentElement.Item.NotMerchandise && element.EquipmentElement.Item.IsCraftedWeapon)
+								if (element.EquipmentElement.Item != null && element.EquipmentElement.Item.NotMerchandise && element.EquipmentElement.Item.IsCraftedWeapon &&
+								(settings.IgnoreUniqueItems == true && element.EquipmentElement.Item.IsUniqueItem != true))
 								{
 									to_remove.Add(element);
 									// Debug
