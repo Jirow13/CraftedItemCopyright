@@ -1,113 +1,72 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <MNB2DIR>D:\SteamLibrary\steamapps\common\Mount &amp; Blade II Bannerlord</MNB2DIR>
-    <MOD_ID>CraftedItemCopyright</MOD_ID>
-    <MOD_FOLDER>$(MNB2DIR)\Modules\$(MOD_ID)\</MOD_FOLDER>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <PlatformTarget Condition=" '$(PlatformTarget)' == '' ">x64</PlatformTarget>
-    <ProjectGuid>{56A89D8C-F7C7-4B8B-A38D-E34813A9E374}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CraftedItemCopyRight</RootNamespace>
-    <AssemblyName>CraftedItemCopyRight</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <Version>1.5.5.0</Version>
+    <TargetFramework>net472</TargetFramework>
+    <Platforms>x64</Platforms>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ModuleName>$(MSBuildProjectName)</ModuleName>
+	<!-- Set as Machine Env Variable, or define in line below -->
+	<!-- <BL_GAME_DIR>Define Path Here</BL_GAME_DIR> -->
+    <!-- <GameFolder>$(BL_GAME_DIR)</GameFolder> -->
+	<GameFolder>$(BL_GAME_DIR_GOG)</GameFolder>
+    <Authors>Jiros</Authors>
   </PropertyGroup>
-  <!-- Debug | Release Config -->
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>8</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NoWarn>1701;1702</NoWarn>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Optimize>false</Optimize>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>8</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartAction>Program</StartAction>
-    <StartProgram>$(MNB2DIR)\bin\Win64_Shipping_Client\Bannerlord.exe</StartProgram>
-    <StartArguments>
-    </StartArguments>
-    <StartWorkingDirectory>$(MNB2DIR)\bin\Win64_Shipping_Client</StartWorkingDirectory>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Lib.Harmony.2.0.4\lib\net472\0Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="MCMv3, Version=3.1.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Bannerlord.MCM.3.1.9\lib\net472\MCMv3.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationFramework" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Net.Http" />
-    <!-- Bannerlord Module Assemblies  -->
-    <Reference Include="$(MNB2DIR)\bin\Win64_Shipping_Client\TaleWorlds*.dll">
+    <Reference Include="$(GameFolder)\bin\Win64_Shipping_Client\TaleWorlds.*.dll">
       <HintPath>%(Identity)</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="$(MNB2DIR)\Modules\Native\bin\Win64_Shipping_Client\TaleWorlds*.dll">
+    <Reference Include="$(GameFolder)\Modules\Native\bin\Win64_Shipping_Client\*.dll">
       <HintPath>%(Identity)</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="$(MNB2DIR)\Modules\SandBox\bin\Win64_Shipping_Client\SandBox*.dll">
+    <Reference Include="$(GameFolder)\Modules\SandBox\bin\Win64_Shipping_Client\*.dll">
       <HintPath>%(Identity)</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="$(MNB2DIR)\Modules\StoryMode\bin\Win64_Shipping_Client\StoryMode*.dll">
+    <Reference Include="$(GameFolder)\Modules\SandBoxCore\bin\Win64_Shipping_Client\*.dll">
       <HintPath>%(Identity)</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="$(MNB2DIR)\Modules\CustomBattle\bin\Win64_Shipping_Client\TaleWorlds*.dll">
+    <Reference Include="$(GameFolder)\Modules\StoryMode\bin\Win64_Shipping_Client\*.dll">
       <HintPath>%(Identity)</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
-  <!-- Files & Classes -->
+
   <ItemGroup>
-    <Compile Include="DebugHelpers.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="CraftedItemCopyright.cs" />
-    <Compile Include="CraftedItemCopyrightBehavior.cs" />
-    <Compile Include="Utils.cs" />
-    <Compile Include="SubModule.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Remove="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="packages.config" />
+    <PackageReference Include="Bannerlord.BuildResources" Version="1.0.0.32">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Lib.Harmony" Version="2.0.4" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.ButterLib" Version="1.0.18" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.UIExtenderEx" Version="1.0.5" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.MCM" Version="4.1.2" IncludeAssets="compile" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" PrivateAssets="All" />
   </ItemGroup>
+
   <ItemGroup>
-    <Content Include="SubModule.xml" />
+    <Folder Include="_Module\" />
   </ItemGroup>
-  <!-- Post-Build - Uncomment What You Need -->
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="AfterBuild">
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(MOD_FOLDER)\bin\Win64_Shipping_Client\" />
-    <Copy SourceFiles="$(ProjectDir)\SubModule.xml" DestinationFolder="$(MOD_FOLDER)" />
-  </Target>
 </Project>

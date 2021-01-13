@@ -10,7 +10,7 @@ namespace CraftedItemCopyright
         public override string Id => "CraftedItemCopyrightSettings";
         public override string DisplayName => "Crafted Item Copyright Settings";
         public override string FolderName => "CraftedItemCopyrightSettings";
-        public override string Format => "json";
+        public override string FormatType => "json";
 
 
         [SettingPropertyBool("Clean Crafted Items on Game Load (Default Behavior)", Order = 0, RequireRestart = true, HintText = "Remove any crafted items from all settlements when you load the game.")]

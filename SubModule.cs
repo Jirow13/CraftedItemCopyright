@@ -31,7 +31,7 @@ namespace CraftedItemCopyright
 				{
 					if (gameStarterObject != null)
 					{
-						(gameStarterObject as CampaignGameStarter).AddBehavior(CraftedItemCopyrightBehavior.Instance);
+						((CampaignGameStarter)gameStarterObject).AddBehavior(CraftedItemCopyrightBehavior.Instance);
 					}
 				}
 			}
